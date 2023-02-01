@@ -10,4 +10,13 @@
     .alert{
         margin-bottom: 0px!important;
     }
+    .login-wrapper{
+        background: url("{!!asset('web/assets/images/PSU_banner.jpg')!!}");
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: bottom;
+    }
 </style>

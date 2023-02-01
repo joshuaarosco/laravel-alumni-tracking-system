@@ -28,6 +28,27 @@
                 </ul>
             </li>
             @endif
+
+            <li class="{{Request::is('backoffice/survey*')?'open active':''}}">
+                <a href="javascript:;">
+                    <span class="title">Survey</span>
+                    <span class="arrow {{Request::is('backoffice/survey*')?'open active':''}}"></span>
+                </a>
+                <span class="icon-thumbnail {{Request::is('backoffice/survey*')?'bg-success':''}}">
+                    <i class="fa fa-file-text"></i>
+                </span>
+                <ul class="sub-menu">
+                    @if(auth()->check() AND (auth()->user()->type == 'super_user' OR auth()->user()->type == 'admin'))
+                    <li class="{{in_array(request()->route()->getName(),['backoffice.survey.index'])?'open active':''}}">
+                        <a href="{{route('backoffice.survey.index')}}">List</a> <span class="icon-thumbnail">l</span>
+                    </li>
+                    @else
+                    <li class="{{in_array(request()->route()->getName(),['backoffice.survey.response'])?'open active':''}}">
+                        <a href="{{route('backoffice.survey.response')}}">Take the Tracker Survey</a> <span class="icon-thumbnail">s</span>
+                    </li>
+                    @endif
+                </ul>
+            </li>
 		</ul>
 		<div class="clearfix"></div>
 	</div>

@@ -24,7 +24,7 @@ class ImageUploader {
     *@return array
     */
     static public function upload($file, $image_directory = "uploads"){
-
+        
         $storage = env('IMAGE_STORAGE', "file");
 
         $ext = $file->getClientOriginalExtension();

@@ -36,4 +36,11 @@ class Alumni extends Model
         return $this->directory.'/'.$this->filename;
     }
 
+    public function survey(){
+        return $this->hasOne('App\Models\Backoffice\Survey', 'alumni_id','id');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'user_id','id');
+    }
 }

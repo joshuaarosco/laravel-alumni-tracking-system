@@ -2,7 +2,7 @@
     <div class="container text-center">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2">
-                <h6 class="block-title m-b-0">Discover</h6>
+                <h6 class="block-title m-b-0">About Us</h6>
                 <h1 class="m-t-5 light">Something Different, Something New.</h1>
                 <p class="m-t-20">Our long standing vision has been to bypass the usual admin dashboard structure, and move forward with a more sophisticated yet simple framework that would create a credible impact on the many conventional dashboard users.</p><img alt="" class="m-t-30" src="{{asset('web/assets/images/arrow_down.png')}}">
             </div>

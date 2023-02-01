@@ -5,7 +5,7 @@
                 <div class="swiper-slide fit">
                     <div class="slider-wrapper">
                         <div class="background-wrapper" data-swiper-parallax="20%">
-                            {{-- <div data-pages-bg-image="{{asset('web/assets/images/PSU_banner.jpg')}}" draggable="false" class="background"></div> --}}
+                            <div data-pages-bg-image="{{asset('web/assets/images/PSU_bg.jpg')}}" draggable="false" class="background"></div>
                         </div>
                     </div>
                     <div class="content-layer">

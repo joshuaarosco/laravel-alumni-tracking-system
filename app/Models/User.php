@@ -39,4 +39,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function alumni(){
+        return $this->hasOne('App\Models\Backoffice\Alumni', 'user_id','id');
+    }
 }

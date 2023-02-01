@@ -64,7 +64,8 @@ class AlumniController extends Controller
     }
 
     public function update(Request $request){
-        return $this->CRUDservice->save($request, $this->repo);
+        $crudData = $this->CRUDservice->save($request, $this->repo);
+        return redirect()->back();
     }
 
     public function delete($id){

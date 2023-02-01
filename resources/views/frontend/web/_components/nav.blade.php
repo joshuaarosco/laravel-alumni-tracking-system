@@ -36,11 +36,16 @@
                     <li>
                         <a data-text="About Us" class="link" href="{{route('index')}}#about-us">About Us </a>
                     </li>
+                    @if(auth()->check())
+                    <li>
+                        <a data-text="Login" class="link" href="{{route('backoffice.auth.login')}}">Dashboard </a>
+                    </li>
+                    @else
                     <li>
                         <a data-text="Login" class="link" href="{{route('backoffice.auth.login')}}">Login </a>
                     </li>
+                    @endif
                 </ul>
-                <a href="#" class="search-toggle hidden-xs hidden-sm" data-toggle="search"><i class="fs-14 pg-search"></i></a>
 
                 <div class="font-arial m-l-35 m-r-35 m-b-20  visible-sm visible-xs m-t-30">
                     <p class="fs-11 small-text muted">Copyright &copy; {{date('Y')}} {{env('APP_NAME')}}</p>

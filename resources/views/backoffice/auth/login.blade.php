@@ -3,7 +3,7 @@
 @push('content')
   <div class="login-wrapper">
     <div class="bg-pic">
-      <img alt="" class="lazy" data-src="{{asset('web/assets/images/PSU_banner.jpg')}}" data-src-retina="{{asset('web/assets/images/PSU_banner.jpg')}}" src="{{asset('web/assets/images/PSU_banner.jpg')}}">
+      {{-- <img alt="" class="lazy" data-src="{{asset('web/assets/images/PSU_banner.jpg')}}" data-src-retina="{{asset('web/assets/images/PSU_banner.jpg')}}" src="{{asset('web/assets/images/PSU_banner.jpg')}}"> --}}
       <div class="bg-caption pull-bottom sm-pull-bottom text-white p-l-20 m-b-20">
         <h2 class="semi-bold text-white">Alumni Tracking System</h2>
         <p class="small">of CCS of Pangasinan State University Lingayen Campus</p>

@@ -3,6 +3,7 @@
 namespace App\Repositories\Backoffice;
 use App\Domain\Interfaces\Repositories\Backoffice\IAlumniRepository;
 
+use App\Services\ImageUploader as UploadLogic;
 use App\Models\Backoffice\Alumni;
 use App\Models\User as Model;
 use DB, Str;
@@ -17,8 +18,8 @@ class AlumniRepository extends Model implements IAlumniRepository
     public function saveData($request){
         DB::beginTransaction();
         try {
-            $user = $this->find($request->id);
-            $alumni = $user? Alumni::where('user_id', $user->id)->first() :new Alumni;
+            $user = $this->find($request->user_id);
+            $alumni = $user? Alumni::where('user_id', $user->id)->first() : null;
             $password = Str::random(8);
             if(!$user){
                 $user = new self;
@@ -33,8 +34,10 @@ class AlumniRepository extends Model implements IAlumniRepository
             //set and save password if theres no user fetch
 
             $user->save();
-
-            $alumni->user_id = $user->id;
+            if(!$alumni){
+                $alumni = new Alumni;
+                $alumni->user_id = $user->id;
+            }
             $alumni->fname = $request->fname;
             $alumni->mname = $request->mname;
             $alumni->lname = $request->lname;
@@ -51,15 +54,15 @@ class AlumniRepository extends Model implements IAlumniRepository
                 $alumni->directory = $upload["directory"];
                 $alumni->filename = $upload["filename"];
             }
-
+            
             $alumni->save();
 
             DB::commit();
             $user->password = $password;
             return $user;
         } catch (\Exception $e) {
-            DB::rollback();
-            return false;
+             DB::rollback();
+             return false;
         }
     }
 

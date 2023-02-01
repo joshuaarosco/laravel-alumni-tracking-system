@@ -46,23 +46,29 @@
                 <tbody>
                     <tr>
                         <td class="v-align-middle bold" width="5%">#</td>
-                        <td class="v-align-middle bold" width="10%">Avatar</td>
-                        <td class="v-align-middle bold" width="15%">Name</td>
-                        <td class="v-align-middle bold" width="30%">Email | Contact Number</td>
-                        <td class="v-align-middle bold" width="35%">Batch</td>
-                        <td class="v-align-middle bold" width="35%">Course</td>
+                        <td class="v-align-middle bold" width="15%">Avatar</td>
+                        <td class="v-align-middle bold" width="25%">Name</td>
+                        <td class="v-align-middle bold" width="25%">Email | Contact Number</td>
+                        <td class="v-align-middle bold" width="30%">Course</td>
                         <td class="v-align-middle bold text-right" width="15%">Actions</td>
                     </tr>
                     @forelse($alumni as $index => $info)
                     <tr>
                         <td>{{$index+1}}</td>
-                        <td class="v-align-middle semi-bold">{{$info->code}}</td>
+                        <td class="v-align-middle semi-bold">
+                            <span class="thumbnail-wrapper circular inline avatar">
+                                @if($info->getAvatar()!='/')
+                                <img src="{{$info->getAvatar()}}" alt="avatar" height="40" width="40">
+                                @else
+                                <img src="{{asset('assets/img/profiles/avatar.jpg')}}" alt="avatar" height="40" width="40">
+                                @endif
+                            </span>
+                        </td>
                         <td class="v-align-middle">{{$info->fname}} {{$info->mname}} {{$info->lname}}</td>
                         <td class="v-align-middle">
                             <a href="mailto:{{$info->email}}">{{$info->email}}</a> |
                             <a href="tel:{{$info->contact_number}}">{{$info->contact_number}}</a>
                         </td>
-                        <td> {{$info->batch}} </td>
                         <td> {{Str::limit($info->course,50)}} </td>
                         <td class="text-right">
                             <button
@@ -72,14 +78,14 @@
                             data-target="#edit">
                                 <i class="fa fa-pencil"></i>
                             </button>
-                            <button
+                            {{-- <button
                             class="btn btn-warning btn-rounded btn-xs btn-delete"
                             title="Delete"
                             data-url="{{route('backoffice.alumni.delete',$info->id)}}"
                             data-toggle="modal"
                             data-target="#delete">
                                 <i class="fa fa-times"></i>
-                            </button>
+                            </button> --}}
                         </td>
                     </tr>
                     @empty
@@ -123,6 +129,7 @@
 <form method="POST" action="{{route('backoffice.alumni.update')}}" id="" role="form" autocomplete="off">
     @csrf
     <input type="hidden" name="id" class="{{Str::lower($title)}}-id">
+    <input type="hidden" name="user_id" class="{{Str::lower($title)}}-user_id">
     @include('backoffice.pages.alumni._components.form')
     <div class="clearfix"></div>
     <button class="btn btn-success mr-2" type="submit">Save</button>
@@ -164,10 +171,13 @@ $(function() {
                     lname,
                     course,
                     email,
-                    contact_number
+                    contact_number,
+                    user_id
                 } = data.datas;
-
+                console.log('Id ==>>' + id);
+                console.log('User Id ==>>' + user_id);
                 $(".alumni-id").val(id);
+                $(".alumni-user_id").val(user_id);
                 $(".alumni-fname").val(fname);
                 $(".alumni-mname").val(mname);
                 $(".alumni-lname").val(lname);
@@ -197,5 +207,14 @@ $(function() {
     $(".page-load").hide();
 });
 </script>
+@endpush
+
+@push('css')
+<style>
+    .avatar{
+        height: 70px;
+        width: 70px;
+    }
+</style>
 @endpush
 
