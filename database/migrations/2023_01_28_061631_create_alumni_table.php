@@ -28,6 +28,7 @@ class CreateAlumniTable extends Migration
             $table->string('status')->nullable();
             $table->string('company')->nullable();
             $table->string('work_position')->nullable();
+            $table->string('related')->nullable();
             $table->text('path')->nullable();
             $table->text('directory')->nullable();
             $table->string('filename', 100)->nullable();

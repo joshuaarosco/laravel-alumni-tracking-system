@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xl-6">
+        <div class="col-xl-4">
             <div class="form-group form-group-default required {{$errors->has('company')?'has-error':null}}" >
                 <label>Company</label>
                 <input type="text" class="form-control" name="company" value="{{old('company', auth()->check()? $alumni->company:'')}}" required {{$alumni->company?'readonly':''}}>
@@ -69,12 +69,29 @@
                 @endif
             </div>
         </div>
-        <div class="col-xl-6">
+        <div class="col-xl-4">
             <div class="form-group form-group-default required {{$errors->has('work_position')?'has-error':null}}" >
                 <label>Work / Position</label>
                 <input type="text" class="form-control" name="work_position" value="{{old('work_position', auth()->check()? $alumni->work_position:'')}}" required {{$alumni->work_position?'readonly':''}}>
                 @if($errors->has('work_position'))
                 <label class="error" for="work_position">{{$errors->first('work_position')}}</label>
+                @endif
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="form-group form-group-default required {{$errors->has('related')?'has-error':null}}">
+                <label>Is your current work related to your course?</label>
+                <select class="form-control" name="related" id="related" required {{$alumni->related?'readonly':''}}>
+                    @foreach ($relateds as $index => $related)
+                    @if(auth()->check() AND $alumni AND $alumni->related == $related)
+                    <option selected value="{{$related}}">{{$related}}</option>
+                    @else
+                    <option value="{{$related}}">{{$related}}</option>
+                    @endif
+                    @endforeach
+                </select>
+                @if($errors->has('related'))
+                <label class="error" for="related">{{$errors->first('related')}}</label>
                 @endif
             </div>
         </div>

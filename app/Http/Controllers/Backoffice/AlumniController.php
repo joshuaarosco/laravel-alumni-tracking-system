@@ -27,21 +27,9 @@ class AlumniController extends Controller
         $this->CRUDservice = $CRUDservice;
         $this->data['title'] = 'Alumni';
         $this->data['courses'] = [
-            'AB English Language',
-            'AB Economics',
-            'Bachelor of Secondary Education',
-            'Bachelor of Technology and Livelihood Education',
-            'Bachelor of Technical and Vocational Teacher Education',
-            'Bachelor of Public Administration',
-            'BS Biology',
             'BS Computer Science',
             'BS Information Technology',
-            'BS Hospitality Management',
-            'BS Nutrition and Dietetics',
-            'BS Social Work',
-            'BS Business Administration major in Operations Mgt., Financial Mgt.',
             'BS Mathematics',
-            'Bachelor of Industrial Technology',
         ];
     }
 

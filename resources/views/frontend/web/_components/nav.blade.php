@@ -33,9 +33,6 @@
                     <li>
                         <a data-text="Home" class="link" href="{{route('index')}}#top">Home </a>
                     </li>
-                    <li>
-                        <a data-text="About Us" class="link" href="{{route('index')}}#about-us">About Us </a>
-                    </li>
                     @if(auth()->check())
                     <li>
                         <a data-text="Login" class="link" href="{{route('backoffice.auth.login')}}">Dashboard </a>

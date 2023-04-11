@@ -34,11 +34,12 @@
                 <tbody>
                     <tr>
                         <td class="v-align-middle bold" width="5%">#</td>
-                        <td class="v-align-middle bold" width="10%">Avatar</td>
-                        <td class="v-align-middle bold" width="10%">Name</td>
-                        <td class="v-align-middle bold" width="10%">Email | Contact Number</td>
+                        <td class="v-align-middle bold" width="8%">Avatar</td>
+                        <td class="v-align-middle bold" width="8%">Name</td>
+                        <td class="v-align-middle bold" width="12%">Email | Contact Number</td>
                         <td class="v-align-middle bold" width="10%">Course</td>
                         <td class="v-align-middle bold" width="10%">Work/Position</td>
+                        <td class="v-align-middle bold" width="10%">Course related work</td>
                         <td class="v-align-middle bold text-right" width="15%">Actions</td>
                     </tr>
                     @forelse($survey as $index => $info)
@@ -60,6 +61,7 @@
                         </td>
                         <td> {{Str::limit($info->alumni->course,50)}} </td>
                         <td> {{Str::limit($info->alumni->work_position,50)}} </td>
+                        <td> {{Str::limit($info->alumni->related,50)}} </td>
                         <td class="text-right">
                             <a
                                 class="btn btn-default btn-rounded btn-xs btn-edit"

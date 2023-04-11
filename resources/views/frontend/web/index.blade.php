@@ -6,7 +6,6 @@
 {{-- End of Banner --}}
 
 {{-- Short Intro --}}
-@include('frontend.web._sections.intro')
 {{-- End of Short Intro --}}
 
 @push('js')

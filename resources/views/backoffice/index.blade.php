@@ -65,7 +65,7 @@
 				</a>
 				@endif
 			</div>
-				<div class="col-lg-4">
+				<div class="col-lg-3">
 					@if(auth()->check() AND auth()->user()->type == 'alumni')
 					<div class="m-b-10">
 						<div class="ar-1-1 widget-1-wrapper">
@@ -137,11 +137,18 @@
 									</div>
 								</div>
 								<div class="p-l-20">
-									<h1 class="no-margin p-b-5 text-white">{{ ($total_survey/$total_alumni)*100 }}%</h1>
+									@if($total_alumni != 0)
+									@php
+										$sva = ($total_survey/$total_alumni)*100;
+									@endphp
+									<h1 class="no-margin p-b-5 text-white">{{ round($sva, 2) }}%</h1>
+									@endif
 								</div>
 								<div class="mt-auto">
 									<div class="progress progress-small m-b-20">
-										<div class="progress-bar progress-bar-white" style="width:{{ ($total_survey/$total_alumni)*100 }}%"></div>
+										@if($total_alumni != 0)
+										<div class="progress-bar progress-bar-white" style="width:{{ round($sva,2) }}%"></div>
+										@endif
 									</div>
 								</div>
 							</div>
@@ -173,9 +180,9 @@
 					</div>
 					@endif
 				</div>
-				<div class="col-lg-5">
+				@if(auth()->check() AND auth()->user()->type != 'alumni')
+				<div class="col-lg-3">
 					<!-- START WIDGET widget_tableWidgetBasic-->
-					@if(auth()->check() AND auth()->user()->type != 'alumni')
 					<div class="widget-11-2 card widget-loader-circle full-height d-flex flex-column m-b-10">
 						<div class="card-header">
 							<div class="card-title">Total Number of
@@ -218,51 +225,53 @@
 							</table>
 						</div>
 					</div>
-					<div class="widget-11-2 card  no-margin widget-loader-circle full-height d-flex flex-column">
-						<div class="card-header">
-							<div class="card-title">Total Number of
-							</div>
-							<div class="card-controls">
-								<ul>
-									<li><a data-toggle="refresh" class="card-refresh" href="#"><i
-										class="card-icon card-icon-refresh"></i></a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="p-l-20 p-r-20 p-b-10 p-t-5">
-							<div class="pull-left">
-								<h3 class="text-primary no-margin">Alumni Per Year</h3>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="widget-11-table auto-overflow">
-							<table class="table table-condensed table-hover">
-								<tbody>
-									@foreach ($group_by_year_graduated as $index => $year)
-										@if($index == '')
-										<tr>
-											<td class="fs-12 w-50">Not populated</td>
-											<td class="w-25">
-												<span class="font-montserrat fs-18">{{ $year->count() }}</span>
-											</td>
-										</tr>
-										@else
-										<tr>
-											<td class="fs-12 w-50">Batch {{$index}}</td>
-											<td class="w-25">
-												<span class="font-montserrat fs-18">{{ $year->count() }}</span>
-											</td>
-										</tr>
-										@endif
-									@endforeach
-								</tbody>
-							</table>
-						</div>
-					</div>
-					@endif
 				<!-- END WIDGET -->
 			</div>
+			<div class="col-lg-3">
+				<div class="widget-11-2 card  no-margin widget-loader-circle full-height d-flex flex-column">
+					<div class="card-header">
+						<div class="card-title">Total Number of
+						</div>
+						<div class="card-controls">
+							<ul>
+								<li><a data-toggle="refresh" class="card-refresh" href="#"><i
+									class="card-icon card-icon-refresh"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="p-l-20 p-r-20 p-b-10 p-t-5">
+						<div class="pull-left">
+							<h3 class="text-primary no-margin">Alumni Per Year</h3>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="widget-11-table auto-overflow">
+						<table class="table table-condensed table-hover">
+							<tbody>
+								@foreach ($group_by_year_graduated as $index => $year)
+									@if($index == '')
+									<tr>
+										<td class="fs-12 w-50">Not populated</td>
+										<td class="w-25">
+											<span class="font-montserrat fs-18">{{ $year->count() }}</span>
+										</td>
+									</tr>
+									@else
+									<tr>
+										<td class="fs-12 w-50">Batch {{$index}}</td>
+										<td class="w-25">
+											<span class="font-montserrat fs-18">{{ $year->count() }}</span>
+										</td>
+									</tr>
+									@endif
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			@endif
 		</div>
 	</div>
 </div>

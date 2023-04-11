@@ -27,6 +27,7 @@ class Alumni extends Model
         'batch',
         'course',
         'status',
+        'related',
         'path',
         'directory',
         'filename',

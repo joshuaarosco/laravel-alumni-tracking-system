@@ -28,6 +28,7 @@ class SurveyRepository extends Model implements ISurveyRepository
             $alumni->course = $request->course;
             $alumni->company = $request->company;
             $alumni->work_position = $request->work_position;
+            $alumni->related = $request->related;
 
             $alumni->save();
 
