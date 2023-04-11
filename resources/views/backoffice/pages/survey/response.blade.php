@@ -30,6 +30,9 @@
         padding-left: 5px;
         padding-right: 5px;
     }
+    .g-form{
+        width: 100%;
+    }
 </style>
 @endpush
 
@@ -42,38 +45,9 @@
         </ol>
         <form action="" method="post" autocomplete="on">
             <input type="hidden" name="_token" value="{{csrf_token()}}">
-            <div class="p-3 bg-white b-1">
-                <div class="card">
-                    <div class="card-body">
-                        @include('backoffice.pages.survey._components.personal_information')
-                    </div>
-                </div>
-                
-                <div class="card">
-                    <div class="card-body">
-                        @include('backoffice.pages.survey._components.questionaire')
-                    </div>
-                </div>
-                @if(!$survey 
-                OR $alumni->gender == null 
-                OR $alumni->year_graduated == null 
-                OR $alumni->course == null 
-                OR $alumni->company == null
-                OR $alumni->work_position == null)
-                <div class="row">
-                    <div class="col-md-12">
-                        <button aria-label="" class="btn btn-success pull-right" type="submit">Submit Response</button>
-                    </div>
-                </div>
-                @else
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2 class="mw-80 pull-right">Thank you for your response!</h2>
-                    </div>
-                </div>
-                @endif
-            </div>
+            @include('backoffice.pages.survey._components.survey_form')
         </form>
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSf-OgJD4TOgG6S80t9MR0q0oiqvUJ3GCRIOFiMlOdHbKkel1Q/viewform?embedded=true" class="g-form" width="640" height="6898" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>       
     </div>
     <!-- END CONTAINER FLUID -->
 </div>
@@ -95,6 +69,33 @@
 @push('js')<script type="text/javascript">
     $(function() {
         $(".page-load").hide();
-    });
-</script>
-@endpush
+        
+        'use strict';
+        
+        const path = require('path');
+        const google = require('@googleapis/forms');
+        const {authenticate} = require('@google-cloud/local-auth');
+        
+        const formID = '1Jr_AUCTggp5AgUp4DAGdX6kDDtlh0t4NhUC4WN4S9WU';
+            
+            async function runSample(query) {
+                const auth = await authenticate({
+                    keyfilePath: path.join(__dirname, 'credentials.json'),
+                    scopes: 'https://www.googleapis.com/auth/forms.body.readonly',
+                });
+                const forms = google.forms({
+                    version: 'v1',
+                    auth: auth,
+                });
+                const res = await forms.forms.get({formId: formID});
+                console.log(res.data);
+                return res.data;
+            }
+            
+            if (module === require.main) {
+                runSample().catch(console.error);
+            }
+            module.exports = runSample;
+        });
+    </script>
+    @endpush
