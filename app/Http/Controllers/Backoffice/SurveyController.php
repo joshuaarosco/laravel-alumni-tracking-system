@@ -32,6 +32,9 @@ class SurveyController extends Controller
             'BS Computer Science',
             'BS Information Technology',
             'BS Mathematics',
+            'BS Mathematics (CIT)',
+            'BS Mathematics (Pure)',
+            'BS Mathematics (Statistics)',
         ];
         $this->data['gender'] = [
             '' => 'Please choose a gender...',
@@ -63,7 +66,7 @@ class SurveyController extends Controller
         
         if(auth()->user()->type == 'alumni' AND auth()->user()->email_verified_at == null){
             session()->flash('notification-status', "danger");
-            session()->flash('notification-msg', "Please verify your account first.");
+            session()->flash('notification-msg', "Verify your email account first.");
             return redirect()->route('backoffice.index');
         }
 

@@ -101,7 +101,7 @@ class AlumniRepository extends Model implements IAlumniRepository
     public function checkAlumni($request){
         DB::beginTransaction();
         try {
-            $alumni = Alumni::where('fname', $request->fname)->where('lname', $request->lname)->where('email', $request->email)->first();
+            $alumni = Alumni::where('lname', $request->lname)->where('email', $request->email)->first();
             
             if(!$alumni){
                 session()->flash('notification-status', "danger");

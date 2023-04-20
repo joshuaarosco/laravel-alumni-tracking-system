@@ -280,41 +280,45 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Upcoming Events</h2>
-				@foreach($events as $index => $event)
-				<a href="{{ route('backoffice.events.view', $event->id) }}">
-					<div class="gallery-item first" data-width="2" data-height="1">
-						<img src="{{ $event->getThumbnail() }}" alt="" class="image-responsive-height">
-						<div class="overlayer bottom-left full-width">
-							<div class="overlayer-wrapper item-info ">
-								<div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
-									<div class="">
-										<h3 class="pull-left bold text-white fs-20">{{ Str::limit($event->title, 20) }}</h3>
-										<h5 class="pull-right semi-bold text-white font-montserrat">{{ date('M d, Y', strtotime($event->date)) }}</h5>
-										<div class="clearfix"></div>
-									</div>
-									<div class="m-t-10">
-										<div class="inline">
-											<p class="no-margin text-white fs-12">{{ Str::limit($event->content, 30) }}</p>
-											<p class="rating">
-												{{-- <i class="fa fa-star rated"></i>
-												<i class="fa fa-star rated"></i>
-												<i class="fa fa-star rated"></i>
-												<i class="fa fa-star rated"></i>
-												<i class="fa fa-star"></i> --}}
-											</p>
+				<div class="row">
+					@foreach($events as $index => $event)
+					<div class="col-md-3">
+						<a href="{{ route('backoffice.events.view', $event->id) }}">
+							<div class="gallery-item first w-100" data-width="2" data-height="1">
+								<img src="{{ $event->getThumbnail() }}" alt="" class="image-responsive-height">
+								<div class="overlayer bottom-left full-width">
+									<div class="overlayer-wrapper item-info ">
+										<div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
+											<div class="">
+												<h3 class="pull-left bold text-white fs-20">{{ Str::limit($event->title, 20) }}</h3>
+												<h5 class="pull-right semi-bold text-white font-montserrat">{{ date('M d, Y', strtotime($event->date)) }}</h5>
+												<div class="clearfix"></div>
+											</div>
+											<div class="m-t-10">
+												<div class="inline">
+													<p class="no-margin text-white fs-12">{{ Str::limit($event->content, 30) }}</p>
+													<p class="rating">
+														{{-- <i class="fa fa-star rated"></i>
+														<i class="fa fa-star rated"></i>
+														<i class="fa fa-star rated"></i>
+														<i class="fa fa-star rated"></i>
+														<i class="fa fa-star"></i> --}}
+													</p>
+												</div>
+												<div class="pull-right m-t-10">
+													{{-- <button aria-label="" class="btn btn-white btn-xs btn-mini bold fs-14" type="button">+</button> --}}
+												</div>
+												<div class="clearfix"></div>
+											</div>
 										</div>
-										<div class="pull-right m-t-10">
-											{{-- <button aria-label="" class="btn btn-white btn-xs btn-mini bold fs-14" type="button">+</button> --}}
-										</div>
-										<div class="clearfix"></div>
 									</div>
 								</div>
+								<!-- END PRODUCT OVERLAY DESCRIPTION -->
 							</div>
-						</div>
-						<!-- END PRODUCT OVERLAY DESCRIPTION -->
+						</a>
 					</div>
-				</a>
-				@endforeach
+					@endforeach
+				</div>
 			</div>
 		</div>
 	</div>

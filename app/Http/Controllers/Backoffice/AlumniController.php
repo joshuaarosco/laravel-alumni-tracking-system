@@ -30,6 +30,9 @@ class AlumniController extends Controller
             'BS Computer Science',
             'BS Information Technology',
             'BS Mathematics',
+            'BS Mathematics (CIT)',
+            'BS Mathematics (Pure)',
+            'BS Mathematics (Statistics)',
         ];
     }
 
