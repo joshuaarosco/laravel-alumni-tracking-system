@@ -8,18 +8,22 @@
 <link href="{{asset('assets/plugins/rickshaw/rickshaw.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/plugins/bootstrap-datepicker/css/datepicker3.css')}}" rel="stylesheet" type="text/css" media="screen">
 <link href="{{asset('assets/plugins/jquery-metrojs/MetroJs.css')}}" rel="stylesheet" type="text/css" media="screen" />
+<link href="{{asset('assets/plugins/codrops-dialogFx/dialog.css')}}" rel="stylesheet" type="text/css" media="screen" />
+<link href="{{asset('assets/plugins/codrops-dialogFx/dialog-sandra.css')}}" rel="stylesheet" type="text/css" media="screen" />
+<link href="{{asset('assets/plugins/owl-carousel/assets/owl.carousel.css')}}" rel="stylesheet" type="text/css" media="screen" />
+<link href="{{asset('assets/plugins/jquery-nouislider/jquery.nouislider.css')}}" rel="stylesheet" type="text/css" media="screen" />
 <style>
 	.widget-2:after {
-   		background-image: url("{{asset('web/assets/images/PSU_dashboard.jpg')}}")!important;
+		background-image: url("{{asset('web/assets/images/PSU_dashboard.jpg')}}")!important;
 	}
 	.widget-1:after {
-   		background-image: url("{{asset('web/assets/images/PSU_graduates.jpg')}}")!important;
+		background-image: url("{{asset('web/assets/images/PSU_graduates.jpg')}}")!important;
 	}
 	.card.full-height {
-    	height: unset!important;
+		height: unset!important;
 	}
 	.full-height {
-    	height: unset!important;
+		height: unset!important;
 	}
 	.m-t-3{
 		margin-top: 3px;
@@ -65,99 +69,41 @@
 				</a>
 				@endif
 			</div>
-				<div class="col-lg-3">
-					@if(auth()->check() AND auth()->user()->type == 'alumni')
-					<div class="m-b-10">
-						<div class="ar-1-1 widget-1-wrapper">
-							<!-- START WIDGET widget_imageWidget-->
-							<div class="widget-1 card  bg-complete no-margin widget-loader-circle-lg">
-							  <div class="card-header  top-right ">
-								<div class="card-controls">
-								  <ul>
-									<li><a data-toggle="refresh" class="card-refresh text-black" href="#"><i class="card-icon card-icon-refresh-lg-master"></i></a>
-									</li>
-								  </ul>
-								</div>
-							  </div>
-							  <div class="card-body">
-								<div class="pull-bottom bottom-left bottom-right ">
-								  <span class="label font-montserrat fs-11 all-caps">PSU</span>
-								  <br>
-								  <h2 class="text-white">Take the Tracker Survey</h2>
-								  <p class="text-white hint-text">{{config('app.name')}}</p>
-								  <div class="p-t-10 full-width">
-									<a class="btn-circle-arrow b-grey" href="{{route('backoffice.survey.response')}}"><i class="pg-arrow_minimize text-white"></i></a> <span class="hint-text text-white small">Click here to start</span>
-								  </div>
-								</div>
-							  </div>
-							</div>
-							<!-- END WIDGET -->
-						</div>
-					</div>
-					@else
-					<div class="m-b-10">
-						<div class="widget-10 card no-border bg-warning no-margin widget-loader-bar">
-							<div class="card-header top-left top-right">
-								<div class="card-title text-black hint-text">
-									<span class="font-montserrat fs-11 all-caps">Total Alumni <i class="fa fa-chevron-right"></i></span>
-								</div>
+			<div class="col-lg-3">
+				@if(auth()->check() AND auth()->user()->type == 'alumni')
+				<div class="m-b-10">
+					<div class="ar-1-1 widget-1-wrapper">
+						<!-- START WIDGET widget_imageWidget-->
+						<div class="widget-1 card  bg-complete no-margin widget-loader-circle-lg">
+							<div class="card-header  top-right ">
 								<div class="card-controls">
 									<ul>
-										<li>
-											<a class="card-refresh text-black" data-toggle="refresh" href="#"><i class="card-icon card-icon-refresh"></i></a>
+										<li><a data-toggle="refresh" class="card-refresh text-black" href="#"><i class="card-icon card-icon-refresh-lg-master"></i></a>
 										</li>
 									</ul>
 								</div>
 							</div>
-							<div class="card-body p-t-40">
-								<div class="row">
-									<div class="col-sm-12">
-										<h1 class="no-margin p-b-5 text-white semi-bold">{{$total_alumni}}</h1>
-									</div>
-								</div>
-								<div class="p-t-10 full-width">
-									<a class="btn-circle-arrow b-grey" href="{{route('backoffice.alumni.index')}}"><i class="pg-arrow_minimize text-white"></i></a> <span class="hint-text small">Show more</span>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="m-b-10">
-						<div class="widget-9 card no-border bg-success no-margin widget-loader-bar">
-							<div class="full-height d-flex flex-column">
-								<div class="card-header">
-									<div class="card-title text-black">
-										<span class="font-montserrat fs-11 all-caps">Survey Response vs Total Alumni <i class="fa fa-chevron-right"></i></span>
-									</div>
-									<div class="card-controls">
-										<ul>
-											<li>
-												<a class="card-refresh text-black" data-toggle="refresh" href="#"><i class="card-icon card-icon-refresh"></i></a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div class="p-l-20">
-									@if($total_alumni != 0)
-									@php
-										$sva = ($total_survey/$total_alumni)*100;
-									@endphp
-									<h1 class="no-margin p-b-5 text-white">{{ round($sva, 2) }}%</h1>
-									@endif
-								</div>
-								<div class="mt-auto">
-									<div class="progress progress-small m-b-20">
-										@if($total_alumni != 0)
-										<div class="progress-bar progress-bar-white" style="width:{{ round($sva,2) }}%"></div>
-										@endif
+							<div class="card-body">
+								<div class="pull-bottom bottom-left bottom-right ">
+									<span class="label font-montserrat fs-11 all-caps">PSU</span>
+									<br>
+									<h2 class="text-white">Take the Tracker Survey</h2>
+									<p class="text-white hint-text">{{config('app.name')}}</p>
+									<div class="p-t-10 full-width">
+										<a class="btn-circle-arrow b-grey" href="{{route('backoffice.survey.response')}}"><i class="pg-arrow_minimize text-white"></i></a> <span class="hint-text text-white small">Click here to start</span>
 									</div>
 								</div>
 							</div>
 						</div>
+						<!-- END WIDGET -->
 					</div>
-					<div class="widget-10 card no-border bg-white no-margin widget-loader-bar">
+				</div>
+				@else
+				<div class="m-b-10">
+					<div class="widget-10 card no-border bg-warning no-margin widget-loader-bar">
 						<div class="card-header top-left top-right">
 							<div class="card-title text-black hint-text">
-								<span class="font-montserrat fs-11 all-caps">Total Survey Response <i class="fa fa-chevron-right"></i></span>
+								<span class="font-montserrat fs-11 all-caps">Total Alumni <i class="fa fa-chevron-right"></i></span>
 							</div>
 							<div class="card-controls">
 								<ul>
@@ -170,61 +116,119 @@
 						<div class="card-body p-t-40">
 							<div class="row">
 								<div class="col-sm-12">
-									<h1 class="no-margin p-b-5 text-warning semi-bold">{{$total_survey}}</h1>
+									<h1 class="no-margin p-b-5 text-white semi-bold">{{$total_alumni}}</h1>
 								</div>
 							</div>
 							<div class="p-t-10 full-width">
-								<a class="btn-circle-arrow b-grey" href="{{route('backoffice.survey.index')}}"><i class="pg-arrow_minimize text-warning"></i></a> <span class="hint-text small">Show more</span>
+								<a class="btn-circle-arrow b-grey" href="{{route('backoffice.alumni.index')}}"><i class="pg-arrow_minimize text-white"></i></a> <span class="hint-text small">Show more</span>
 							</div>
 						</div>
 					</div>
-					@endif
 				</div>
-				@if(auth()->check() AND auth()->user()->type != 'alumni')
-				<div class="col-lg-3">
-					<!-- START WIDGET widget_tableWidgetBasic-->
-					<div class="widget-11-2 card widget-loader-circle full-height d-flex flex-column m-b-10">
-						<div class="card-header">
-							<div class="card-title">Total Number of
+				<div class="m-b-10">
+					<div class="widget-9 card no-border bg-success no-margin widget-loader-bar">
+						<div class="full-height d-flex flex-column">
+							<div class="card-header">
+								<div class="card-title text-black">
+									<span class="font-montserrat fs-11 all-caps">Survey Response vs Total Alumni <i class="fa fa-chevron-right"></i></span>
+								</div>
+								<div class="card-controls">
+									<ul>
+										<li>
+											<a class="card-refresh text-black" data-toggle="refresh" href="#"><i class="card-icon card-icon-refresh"></i></a>
+										</li>
+									</ul>
+								</div>
 							</div>
-							<div class="card-controls">
-								<ul>
-									<li><a data-toggle="refresh" class="card-refresh" href="#"><i
-										class="card-icon card-icon-refresh"></i></a>
-									</li>
-								</ul>
+							<div class="p-l-20">
+								@if($total_alumni != 0)
+								@php
+								$sva = ($total_survey/$total_alumni)*100;
+								@endphp
+								<h1 class="no-margin p-b-5 text-white">{{ round($sva, 2) }}%</h1>
+								@endif
 							</div>
-						</div>
-						<div class="p-l-20 p-r-20 p-b-10 p-t-5">
-							<div class="pull-left">
-								<h3 class="text-primary no-margin">Alumni Per Course</h3>
+							<div class="mt-auto">
+								<div class="progress progress-small m-b-20">
+									@if($total_alumni != 0)
+									<div class="progress-bar progress-bar-white" style="width:{{ round($sva,2) }}%"></div>
+									@endif
+								</div>
 							</div>
-							<div class="clearfix"></div>
-						</div>
-						<div class="widget-11-table auto-overflow">
-							<table class="table table-condensed table-hover">
-								<tbody>
-									@foreach ($group_by_course as $index => $course)
-										@if($index == '')
-										<tr>
-											<td class="fs-12 w-50">Not populated</td>
-											<td class="w-25">
-												<span class="font-montserrat fs-18">{{ $course->count() }}</span>
-											</td>
-										</tr>
-										@else
-										<tr>
-											<td class="fs-12 w-50">{{$index}}</td>
-											<td class="w-25">
-												<span class="font-montserrat fs-18">{{ $course->count() }}</span>
-											</td>
-										</tr>
-										@endif
-									@endforeach
-								</tbody>
-							</table>
 						</div>
 					</div>
+				</div>
+				<div class="widget-10 card no-border bg-white no-margin widget-loader-bar">
+					<div class="card-header top-left top-right">
+						<div class="card-title text-black hint-text">
+							<span class="font-montserrat fs-11 all-caps">Total Survey Response <i class="fa fa-chevron-right"></i></span>
+						</div>
+						<div class="card-controls">
+							<ul>
+								<li>
+									<a class="card-refresh text-black" data-toggle="refresh" href="#"><i class="card-icon card-icon-refresh"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="card-body p-t-40">
+						<div class="row">
+							<div class="col-sm-12">
+								<h1 class="no-margin p-b-5 text-warning semi-bold">{{$total_survey}}</h1>
+							</div>
+						</div>
+						<div class="p-t-10 full-width">
+							<a class="btn-circle-arrow b-grey" href="{{route('backoffice.survey.index')}}"><i class="pg-arrow_minimize text-warning"></i></a> <span class="hint-text small">Show more</span>
+						</div>
+					</div>
+				</div>
+				@endif
+			</div>
+			@if(auth()->check() AND auth()->user()->type != 'alumni')
+			<div class="col-lg-3">
+				<!-- START WIDGET widget_tableWidgetBasic-->
+				<div class="widget-11-2 card widget-loader-circle full-height d-flex flex-column m-b-10">
+					<div class="card-header">
+						<div class="card-title">Total Number of
+						</div>
+						<div class="card-controls">
+							<ul>
+								<li><a data-toggle="refresh" class="card-refresh" href="#"><i
+									class="card-icon card-icon-refresh"></i></a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="p-l-20 p-r-20 p-b-10 p-t-5">
+						<div class="pull-left">
+							<h3 class="text-primary no-margin">Alumni Per Course</h3>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="widget-11-table auto-overflow">
+						<table class="table table-condensed table-hover">
+							<tbody>
+								@foreach ($group_by_course as $index => $course)
+								@if($index == '')
+								<tr>
+									<td class="fs-12 w-50">Not populated</td>
+									<td class="w-25">
+										<span class="font-montserrat fs-18">{{ $course->count() }}</span>
+									</td>
+								</tr>
+								@else
+								<tr>
+									<td class="fs-12 w-50">{{$index}}</td>
+									<td class="w-25">
+										<span class="font-montserrat fs-18">{{ $course->count() }}</span>
+									</td>
+								</tr>
+								@endif
+								@endforeach
+							</tbody>
+						</table>
+					</div>
+				</div>
 				<!-- END WIDGET -->
 			</div>
 			<div class="col-lg-3">
@@ -250,21 +254,21 @@
 						<table class="table table-condensed table-hover">
 							<tbody>
 								@foreach ($group_by_year_graduated as $index => $year)
-									@if($index == '')
-									<tr>
-										<td class="fs-12 w-50">Not populated</td>
-										<td class="w-25">
-											<span class="font-montserrat fs-18">{{ $year->count() }}</span>
-										</td>
-									</tr>
-									@else
-									<tr>
-										<td class="fs-12 w-50">Batch {{$index}}</td>
-										<td class="w-25">
-											<span class="font-montserrat fs-18">{{ $year->count() }}</span>
-										</td>
-									</tr>
-									@endif
+								@if($index == '')
+								<tr>
+									<td class="fs-12 w-50">Not populated</td>
+									<td class="w-25">
+										<span class="font-montserrat fs-18">{{ $year->count() }}</span>
+									</td>
+								</tr>
+								@else
+								<tr>
+									<td class="fs-12 w-50">Batch {{$index}}</td>
+									<td class="w-25">
+										<span class="font-montserrat fs-18">{{ $year->count() }}</span>
+									</td>
+								</tr>
+								@endif
 								@endforeach
 							</tbody>
 						</table>
@@ -272,6 +276,46 @@
 				</div>
 			</div>
 			@endif
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<h2>Upcoming Events</h2>
+				@foreach($events as $index => $event)
+				<a href="{{ route('backoffice.events.view', $event->id) }}">
+					<div class="gallery-item first" data-width="2" data-height="1">
+						<img src="{{ $event->getThumbnail() }}" alt="" class="image-responsive-height">
+						<div class="overlayer bottom-left full-width">
+							<div class="overlayer-wrapper item-info ">
+								<div class="gradient-grey p-l-20 p-r-20 p-t-20 p-b-5">
+									<div class="">
+										<h3 class="pull-left bold text-white fs-20">{{ Str::limit($event->title, 20) }}</h3>
+										<h5 class="pull-right semi-bold text-white font-montserrat">{{ date('M d, Y', strtotime($event->date)) }}</h5>
+										<div class="clearfix"></div>
+									</div>
+									<div class="m-t-10">
+										<div class="inline">
+											<p class="no-margin text-white fs-12">{{ Str::limit($event->content, 30) }}</p>
+											<p class="rating">
+												{{-- <i class="fa fa-star rated"></i>
+												<i class="fa fa-star rated"></i>
+												<i class="fa fa-star rated"></i>
+												<i class="fa fa-star rated"></i>
+												<i class="fa fa-star"></i> --}}
+											</p>
+										</div>
+										<div class="pull-right m-t-10">
+											{{-- <button aria-label="" class="btn btn-white btn-xs btn-mini bold fs-14" type="button">+</button> --}}
+										</div>
+										<div class="clearfix"></div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- END PRODUCT OVERLAY DESCRIPTION -->
+					</div>
+				</a>
+				@endforeach
+			</div>
 		</div>
 	</div>
 </div>
@@ -295,6 +339,14 @@
 <script src="{{asset('assets/plugins/skycons/skycons.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js')}}" type="text/javascript"></script>
 <script src="{{asset('assets/js/dashboard.js')}}" type="text/javascript"></script>
+
+<script src="{{asset('assets/plugins/imagesloaded/imagesloaded.pkgd.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jquery-isotope/isotope.pkgd.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/plugins/codrops-dialogFx/dialogFx.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/plugins/owl-carousel/owl.carousel.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/plugins/jquery-nouislider/jquery.nouislider.min.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/plugins/jquery-nouislider/jquery.liblink.js')}}" type="text/javascript"></script>
+<script src="{{asset('assets/js/gallery.js')}}" type="text/javascript"></script>
 @endpush
 
 @push('js')

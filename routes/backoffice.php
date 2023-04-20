@@ -12,6 +12,8 @@ Route::group(['middleware' => "backoffice.guest", 'as' => "auth." ], function(){
     Route::get('login',['as' => "login", 'uses' => "LoginController@login"]);
     Route::get('respond-to-survey/{username}',['as' => "respond_to_survey", 'uses' => "LoginController@loginWithId"]);
     Route::post('login',['uses' => "LoginController@authenticate"]);
+    Route::get('verify',['as' => "verify", 'uses' => "LoginController@verify"]);
+    Route::post('verify',['uses' => "LoginController@check"]);
 });
 
 Route::group(['middleware' => ["backoffice.auth"/*, "backoffice.superUserOnly"*/]], function(){
@@ -43,6 +45,15 @@ Route::group(['middleware' => ["backoffice.auth"/*, "backoffice.superUserOnly"*/
         Route::get('response',['as' => "response",'uses' => "SurveyController@response"]);
         Route::post('response',['uses' => "SurveyController@respond"]);
         Route::get('{id}',['as' => "view", 'middleware' => ["backoffice.superUserOnly"],'uses' => "SurveyController@view"]);
+    });
+
+    Route::group(['as' => "events.", 'prefix' => "events"], function(){
+        Route::get('/',['as' => "index",'uses' => "EventsController@index"]);
+        Route::post('/',['as' => "create",'uses' => "EventsController@create"]);
+        Route::get('view/{id}',['as' => "view",'uses' => "EventsController@view"]);
+        Route::post('edit',['as' => "edit",'uses' => "EventsController@edit"]);
+        Route::post('update',['as' => "update",'uses' => "EventsController@update"]);
+        Route::any('delete/{id}',['as' => "delete",'uses' => "EventsController@delete"]);
     });
     
 });

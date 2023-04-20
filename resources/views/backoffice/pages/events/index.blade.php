@@ -17,7 +17,7 @@
         </ol>
         <div class="p-3 bg-white b-1">
             <div class="row">
-                <div class="col-md-7 col-xs-6">
+                <div class="col-md-8 col-xs-6">
                     {{Str::upper($title)}} LIST
                     <div class="pull-right table-btn">
                         {{-- <button class="btn btn-default btn-xs md-hidden mr-1">
@@ -28,10 +28,10 @@
                         </button>
                     </div>
                 </div>
-                <div class="col-md-3 sm-hidden">
-                    <form action="" method="get">
-                        <input type="text" class="frm-control w-100" name="search" value="{{ Input::has('search')?Input::get('search'):'' }}" placeholder="Filter by Name, Email or Course and hit enter...">
-                    </form>
+                <div class="col-md-2 sm-hidden">
+                    {{-- <button class="btn btn-default btn-block btn-xs table-btn">
+                        <i class="fa fa-filter"></i>&nbsp;Filter
+                    </button> --}}
                 </div>
                 <div class="col-md-2 sm-hidden">
                     <button class="btn btn-success btn-create btn-block btn-xs table-btn" data-toggle="modal" data-target="#create">
@@ -46,46 +46,46 @@
                 <tbody>
                     <tr>
                         <td class="v-align-middle bold" width="5%">#</td>
-                        <td class="v-align-middle bold" width="15%">Avatar</td>
-                        <td class="v-align-middle bold" width="25%">Name</td>
-                        <td class="v-align-middle bold" width="25%">Email | Contact Number</td>
-                        <td class="v-align-middle bold" width="30%">Course</td>
+                        <td class="v-align-middle bold" width="15%">Thumbnail</td>
+                        <td class="v-align-middle bold" width="20%">Title</td>
+                        <td class="v-align-middle bold" width="15%">Date</td>
+                        <td class="v-align-middle bold" width="30%">Content</td>
                         <td class="v-align-middle bold text-right" width="15%">Actions</td>
                     </tr>
-                    @forelse($alumni as $index => $info)
+                    @forelse($events as $index => $event)
                     <tr>
                         <td>{{$index+1}}</td>
-                        <td class="v-align-middle semi-bold">
-                            <span class="thumbnail-wrapper circular inline avatar">
-                                @if($info->getAvatar()!='/')
-                                <img src="{{$info->getAvatar()}}" alt="avatar" height="40" width="40">
-                                @else
-                                <img src="{{asset('assets/img/profiles/avatar.jpg')}}" alt="avatar" height="40" width="40">
-                                @endif
-                            </span>
+                        <td>
+                            @if($event->getThumbnail()!='/')
+                            <img src="{{$event->getThumbnail()}}" alt="avatar" height="70" width="70">
+                            @else
+                            <img src="{{asset('assets/img/profiles/avatar.jpg')}}" alt="avatar" height="70" width="70">
+                            @endif
                         </td>
-                        <td class="v-align-middle">{{$info->fname}} {{$info->mname}} {{$info->lname}}</td>
-                        <td class="v-align-middle">
-                            <a href="mailto:{{$info->email}}">{{$info->email}}</a> |
-                            <a href="tel:{{$info->contact_number}}">{{$info->contact_number}}</a>
-                        </td>
-                        <td> {{Str::limit($info->course,50)}} </td>
+                        <td class="v-align-middle">{{$event->title}}</td>
+                        <td class="v-align-middle">{{date('M d, Y',strtotime($event->date))}}</td>
+                        <td> {{Str::limit($event->content,50)}} </td>
                         <td class="text-right">
+                            <a
+                            class="btn btn-default btn-rounded btn-xs"
+                            title="view" href="{{route('backoffice.events.view',$event->id)}}">
+                                <i class="fa fa-eye"></i>
+                            </a>
                             <button
                             class="btn btn-default btn-rounded btn-xs btn-edit"
-                            title="Edit" data-id="{{$info->id}}"
+                            title="Edit" data-id="{{$event->id}}"
                             data-toggle="modal"
                             data-target="#edit">
                                 <i class="fa fa-pencil"></i>
                             </button>
-                            {{-- <button
+                            <button
                             class="btn btn-warning btn-rounded btn-xs btn-delete"
                             title="Delete"
-                            data-url="{{route('backoffice.alumni.delete',$info->id)}}"
+                            data-url="{{route('backoffice.events.delete',$event->id)}}"
                             data-toggle="modal"
                             data-target="#delete">
                                 <i class="fa fa-times"></i>
-                            </button> --}}
+                            </button>
                         </td>
                     </tr>
                     @empty
@@ -96,7 +96,7 @@
                     </tr>
                     @endforelse
                 </tbody>
-                @if($alumni->count() > 0)
+                @if($events->count() > 0)
                 <tfoot>
                     <tr>
                         <th colspan="6">
@@ -116,9 +116,9 @@
 @endpush
 
 @push('modal-create')
-<form method="POST" action="" id="form-personal" role="form" autocomplete="off">
+<form method="POST" action="" id="form-personal" enctype="multipart/form-data" role="form" autocomplete="off">
     @csrf
-    @include('backoffice.pages.alumni._components.form')
+    @include('backoffice.pages.events._components.form')
     <div class="clearfix"></div>
     <button class="btn btn-success mr-2" type="submit">Create a new {{Str::lower($title)}}</button>
     <button class="btn btn-warning" data-dismiss="modal">Close</button>
@@ -126,11 +126,10 @@
 @endpush
 
 @push('modal-edit')
-<form method="POST" action="{{route('backoffice.alumni.update')}}" id="" role="form" autocomplete="off">
+<form method="POST" action="{{route('backoffice.events.update')}}" enctype="multipart/form-data" id="" role="form" autocomplete="off">
     @csrf
     <input type="hidden" name="id" class="{{Str::lower($title)}}-id">
-    <input type="hidden" name="user_id" class="{{Str::lower($title)}}-user_id">
-    @include('backoffice.pages.alumni._components.form')
+    @include('backoffice.pages.events._components.form')
     <div class="clearfix"></div>
     <button class="btn btn-success mr-2" type="submit">Save</button>
     <button class="btn btn-warning" data-dismiss="modal">Close</button>
@@ -160,30 +159,22 @@ $(function() {
         let id = $(this).data('id');
         $.ajax({
             type: "POST",
-            url: "{{route('backoffice.alumni.edit')}}",
+            url: "{{route('backoffice.events.edit')}}",
             data: { _id : id , _token : "{{csrf_token()}}" },
             dataType: "json",
             async: true,
             success: function(data){
                 const {
-                    fname,
-                    mname,
-                    lname,
-                    course,
-                    email,
-                    contact_number,
-                    user_id
+                    id,
+                    title,
+                    date,
+                    content,
                 } = data.datas;
-                console.log('Id ==>>' + id);
-                console.log('User Id ==>>' + user_id);
-                $(".alumni-id").val(id);
-                $(".alumni-user_id").val(user_id);
-                $(".alumni-fname").val(fname);
-                $(".alumni-mname").val(mname);
-                $(".alumni-lname").val(lname);
-                $(".alumni-email").val(email);
-                $(".alumni-contact_number").val(contact_number);
-                $(".alumni-course").val(course);
+                $(".event-id").val(id);
+                $(".event-file").prop('required',false);
+                $(".event-title").val(title);
+                $(".event-date").val(date);
+                $(".event-content").val(content);
                 $(".load-modal").hide();
             },
             error: function(error){
@@ -192,13 +183,9 @@ $(function() {
         });
     });
     $(".btn-create").on("click",function(){
-        $(".alumni-id").val('');
-        $(".alumni-fname").val('');
-        $(".alumni-mname").val('');
-        $(".alumni-lname").val('');
-        $(".alumni-email").val('');
-        $(".alumni-contact_number").val('');
-        $(".alumni-course").val('');
+        $(".event-id").val('');
+        $(".event-title").val('');
+        $(".event-content").val('');
         $(".load-modal").hide();
     });
     $(".btn-delete").on("click",function(){

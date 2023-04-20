@@ -18,7 +18,8 @@
             <strong>{{Str::title(session()->get('notification-status'))}}: </strong> {{session()->get('notification-msg')}}
         </div>
         @else
-        <p class="p-t-35">Sign into your {{config()->get('app.name')}} account</p>
+        <p class="p-t-35">Sign in into your {{config()->get('app.name')}} account. </br> </br> If you are already an Alumni and you dont know your username and password, 
+        <a class="text-primary btn-cons m-t-10" href="{{route('backoffice.auth.verify')}}"><strong>click here to verify your existence to our list of PSU Alumni.</strong></a></p>
         @endif
         <form action="" method="POST" class="p-t-15" id="form-login" name="form-login" role="form">
           {{csrf_field()}}
@@ -40,7 +41,8 @@
                 <input name="remember_me" id="checkbox1" type="checkbox" value="1"> <label for="checkbox1">Keep Me Signed in</label>
               </div>
             </div>
-          </div><button class="btn btn-success btn-cons m-t-10" type="submit">Sign in</button>
+          </div>
+          <button class="btn btn-success btn-cons m-t-10" type="submit">Sign in</button><br>
         </form>
       </div>
     </div>

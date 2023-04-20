@@ -27,6 +27,20 @@
                     </li>
                 </ul>
             </li>
+            <li class="{{Request::is('backoffice/events*')?'open active':''}}">
+                <a href="javascript:;">
+                    <span class="title">Events</span>
+                    <span class="arrow {{Request::is('backoffice/events*')?'open active':''}}"></span>
+                </a>
+                <span class="icon-thumbnail {{Request::is('backoffice/events*')?'bg-success':''}}">
+                    <i class="fa fa-graduation-cap"></i>
+                </span>
+                <ul class="sub-menu">
+                    <li class="{{in_array(request()->route()->getName(),['backoffice.events.index'])?'open active':''}}">
+                        <a href="{{route('backoffice.events.index')}}">List</a> <span class="icon-thumbnail">l</span>
+                    </li>
+                </ul>
+            </li>
             @endif
 
             <li class="{{Request::is('backoffice/survey*')?'open active':''}}">
